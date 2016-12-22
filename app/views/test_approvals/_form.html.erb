@@ -1,0 +1,26 @@
+<div class="row">
+  <%= form_for @test_approval, html: { class: 'form-horizontal'} do |f| %>
+    <% if @test_approval.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@test_approval.errors.count, "error") %> prohibited this test_approval from being saved:</h2>
+
+        <ul>
+        <% @test_approval.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :approved, class: 'control-label' %>
+      <div class="controls">
+        <%= f.check_box :approved %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

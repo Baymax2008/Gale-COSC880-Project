@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>JOINLabwebapp</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <ul class="nav nav-tabs">
+
+        <% if current_user %>
+          <% temp_s = "Login in as: " + current_user.email %>
+
+          <li> <div class="badge right-nav" > <%= temp_s %></div> </li>
+
+          <% if current_user.customer? %>
+            <li><%= link_to "Tests", test_approvals_path %></li>
+            <li><%= link_to "Systems", system_approvals_path %></li>
+            <li><%= link_to "Labs", lab_approvals_path %></li>
+            <li><%= link_to "Account",  users_index_path %></li>
+
+          <% elsif current_user.admin?%>
+            <li><%= link_to "Users", users_index_path %></li>
+
+          <% elsif current_user.it_admin? %>
+            <li><%= link_to "Networks", networks_path %></li>
+            <li>
+              <div class = 'btn-group pull-right right-nav'>
+                <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                  <span class="sr-onlly">Equipment</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><%= link_to "Routers", routers_path %></li>
+                  <li><%= link_to "Encrypters", encrypters_path %></li>
+                </ul>
+              </div>
+            </li>
+            <li><%= link_to "Tests", test_approvals_path %></li>
+            <li><%= link_to "Systems", system_approvals_path %></li>
+            <li><%= link_to "Labs", lab_approvals_path %></li>
+
+          <% elsif current_user.ia_admin? %>
+            <li><%= link_to "Networks", networks_path %></li>
+            <li><%= link_to "Tests", test_approvals_path %></li>
+            <li><%= link_to "Systems", system_approvals_path %></li>
+            <li><%= link_to "Labs", lab_approvals_path %></li>
+
+          <% end %>
+          <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+
+        <% else %>
+          <li><%= link_to "Login", new_user_session_path %></li>
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+
+        <% end %>
+
+      </ul>
+
+      <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert">
+            &times;
+          </button>
+          <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:error] %>
+        <div class="alert alert-error">
+          <button type="button" class="close" data-dismiss="alert">
+            &times;
+          </button>
+          <%= flash[:error] %>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="alert">
+          <button type="button" class="close" data-dismiss="alert">
+            &times;
+          </button>
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+
+    </div>
+
+  </body>
+
+</html>

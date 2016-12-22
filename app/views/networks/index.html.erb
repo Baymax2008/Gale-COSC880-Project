@@ -1,0 +1,35 @@
+<h1>Networks</h1>
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>PoC Name</th>
+          <th>PoC Number</th>
+          <th>Experation Date</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @networks.each do |network| %>
+          <tr>
+            <td><%= network.classification %></td>
+            <td><%= network.pocName %></td>
+            <td><%= network.pocNumber %></td>
+            <td><%= network.experationDate %></td>
+            <td><%= link_to 'Show', network, class: "btn btn-primary" %></td>
+            <td><%= link_to 'Edit', edit_network_path(network), class: "btn btn-success" %></td>
+            <td><%= link_to 'Destroy', network, method: :delete,class: "btn btn-danger",
+                            data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<%= link_to 'Add Network', new_network_path, class: 'btn btn-default' %>

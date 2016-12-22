@@ -1,0 +1,107 @@
+<h2>
+  <strong>Name:</strong>
+  <%= @test.name %>
+</h2>
+
+<h4>
+  <strong>Network:</strong>
+  <%= @test.network.classification %>
+</h4>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @test.start_date %>
+  <strong>End date:</strong>
+  <%= @test.end_date %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @test.test_approval.approved %>
+</p>
+
+<p>
+  <strong>All Lab MoA:</strong>
+  <% if @test.allLabMoA_file_size != nil %>
+      <%= link_to 'View ', @test.allLabMoA.url, target: "_blank" %>
+  <% else %>
+      Missing
+  <% end %>
+</p>
+
+<p>
+  <strong>Test procedures:</strong>
+  <% if @test.testProcedures_file_size != nil %>
+      <%= link_to 'View ', @test.testProcedures.url, target: "_blank" %>
+  <% else %>
+      Missing
+  <% end %>
+</p>
+
+<p>
+  <strong>Lab:</strong>
+  <%= link_to @test.system.lab.name,  @test.system.lab if @test.system.lab %>
+</p>
+
+<p>
+  <strong>System:</strong>
+  <%= link_to @test.system.name,  @test.system if @test.system %>
+</p>
+
+<div class="media">
+  <div class="media-body">
+    <h3>Encrypters</h3>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Serial Number</th>
+        <th>Description</th>
+        <th>Speed</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+        <% @encrypters.each do |encrypter| %>
+          <tr>
+            <td><%= encrypter.serialNum %></td>
+            <td><%= encrypter.description %></td>
+            <td><p><%= encrypter.speed %> mbps</p></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="media">
+  <div class="media-body">
+    <h3>Routers</h3>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Serial Number</th>
+        <th>Description</th>
+        <th>Num ports</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @routers.each do |router| %>
+          <tr>
+            <td><%= router.serialNum %></td>
+            <td><%= router.description %></td>
+            <td><%= router.numPorts %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<% if current_user.customer? %>
+  <%= link_to 'Edit', edit_test_path(@test) %> |
+<% end %>
+<%= link_to 'Back', test_approvals_path %>

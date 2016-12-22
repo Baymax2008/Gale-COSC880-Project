@@ -1,0 +1,36 @@
+<div class="row">
+  <%= form_for @system_approval, html: { class: 'form-horizontal'} do |f| %>
+      <% if @system_approval.errors.any? %>
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(@system_approval.errors.count, "error") %>
+              prohibited this test_approval from being saved:
+            </h2>
+
+            <ul>
+              <% @system_approval.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <div class="control-group">
+        <%= f.label :iaApproved, class: 'control-label' %>
+        <div class="controls">
+          <%= f.check_box :iaApproved %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :atoApproved, class: 'control-label' %>
+        <div class="controls">
+          <%= f.check_box :atoApproved %>
+        </div>
+      </div>
+
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+  <% end %>
+</div>

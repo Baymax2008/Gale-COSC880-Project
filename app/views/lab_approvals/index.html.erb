@@ -1,0 +1,51 @@
+<h1>Labs</h1>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>
+          Accrediation <br>
+          Expiration Date
+        </th>
+        <th>LoA approval</th>
+        <th>LoA expiration</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+        <% @lab_approvals.each do |lab_approval| %>
+          <% if current_user.lab_id == lab_approval.lab.id || current_user.ia_admin? || current_user.it_admin? %>
+
+            <tr>
+              <td><%= lab_approval.lab.name %></td>
+              <td><%= lab_approval.lab.accredDate %></td>
+              <td><%= lab_approval.approved %></td>
+              <td><%= lab_approval.lab.loa_Expiration %></td>
+
+              <td><%= link_to 'Show', lab_approval.lab, class: "btn btn-primary" %></td>
+
+              <% if current_user.ia_admin? %>
+                  <td><%= link_to 'Edit', edit_lab_approval_path(lab_approval), class: "btn btn-success" %></td>
+
+              <% elsif current_user.customer? %>
+                <td><%= link_to 'Edit', edit_lab_path(lab_approval.lab), class: "btn btn-success" %></td>
+                <td><%= link_to 'Destroy', lab_approval.lab, method: :delete, class: "btn btn-danger",
+                                data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<% if current_user.customer? && !current_user.lab_id? %>
+  <%= link_to 'New Lab', new_lab_path, class: 'btn btn-default'%>
+<% end %>

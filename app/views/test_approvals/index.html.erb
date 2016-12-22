@@ -1,0 +1,49 @@
+<h1>Listing Tests</h1>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Test Name</th>
+        <th>Network</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Approved</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+        <% @test_approvals.each do |test_approval| %>
+          <% if current_user.lab_id == test_approval.test.system.lab_id ||
+              current_user.ia_admin? || current_user.it_admin? %>
+            <tr>
+              <td><%= test_approval.test.name %></td>
+              <td><%= test_approval.test.network.classification if test_approval.test.network %></td>
+              <td><%= test_approval.test.start_date %></td>
+              <td><%= test_approval.test.end_date %></td>
+              <td><%= test_approval.approved %></td>
+
+              <td><%= link_to 'Show', test_approval.test, class: 'btn btn-primary' %></td>
+
+              <% if current_user.ia_admin? %>
+                <td><%= link_to 'Edit', edit_test_approval_path(test_approval), class: "btn btn-success" %></td>
+              <% elsif current_user.customer? %>
+                <td><%= link_to 'Edit', edit_test_path(test_approval.test), class: "btn btn-success" %></td>
+                <td><%= link_to 'Destroy', test_approval.test, method: :delete, class: "btn btn-danger",
+                                data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<% if current_user.customer? && current_user.lab_id != nil %>
+    <%= link_to 'New Test', new_test_path, class: 'btn btn-default' %>
+<% end %>

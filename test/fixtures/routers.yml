@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Num_Ports: 1
+  Network: MyString
+  serialNum: MyString
+  description: MyText
+
+two:
+  Num_Ports: 1
+  Network: MyString
+  serialNum: MyString
+  description: MyText

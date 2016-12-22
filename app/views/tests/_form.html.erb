@@ -1,0 +1,73 @@
+<div class="row">
+  <%= form_for @test, html: { class: 'form-horizontal', multipart: true}  do |f| %>
+    <% if @test.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@test.errors.count, "error") %> prohibited this test from being saved:</h2>
+
+        <ul>
+        <% @test.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :name, class: 'control-label col-sm-2"' %>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :network_id, class: 'control-label' %>
+      <div class="controls">
+        <%= collection_select( :test, :network_id, Network.all, :id, :classification, { },
+                               { :multiple => false } ) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :system_id, class: 'control-label' %>
+      <div class="controls">
+        <%= collection_select( :test, :system_id, System.where(lab_id: current_user.lab_id), :id, :name, { },
+                               { :multiple => false } ) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :start_date, class: 'control-label' %>
+      <div class="controls">
+        <%= f.date_select :start_date %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :end_date, class: 'control-label' %>
+      <div class="controls">
+        <%= f.date_select :end_date %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label "Overarching MoA", class: 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :allLabMoA %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label "Test Procedures ", class: 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :testProcedures %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

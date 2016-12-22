@@ -1,0 +1,59 @@
+<
+
+
+
+<!- OLD FILE NO LONGER BEING USED ->
+<h1> If you see this please report what you did!</h1>
+
+
+
+h1>Listing Labs</h1>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Accrediation Expiration Date</th>
+          <th>Loa</th>
+          <th>Loa approval</th>
+          <th>Loa expiration</th>
+          <th>Lab manager</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @labs.each do |lab| %>
+          <% if current_user.lab_id == lab.id || current_user.ia_admin? || current_user.it_admin?%>
+            <% temp = @user.find(lab.mgr_id) %>
+            <tr>
+              <td><%= lab.name %></td>
+              <td><%= lab.accredDate %></td>
+              <td><%= lab.loa %></td>
+              <td><%= lab.loa_Approval %></td>
+              <td><%= lab.loa_Expiration %></td>
+              <td><%= temp.email %></td>
+              <td><%= link_to 'Show', lab, class: "btn btn-primary" %></td>
+              <td><%= link_to 'Edit', edit_lab_path(lab), class: "btn btn-success" %></td>
+              <td><%= link_to 'Destroy', lab, method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        <% end %>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<%= link_to 'New Lab', new_lab_path %>
+
+
+<% if lab_approval.lab.accrediation_file_size != nil%>
+    <td><%= link_to 'View', lab_approval.lab.accrediation.url, target: "_blank" %></td>
+<% else %>
+    <td>Missing</td>
+<% end %>

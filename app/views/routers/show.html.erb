@@ -1,0 +1,23 @@
+<p>
+  <strong>Serial Number:</strong>
+  <%= @router.serialNum %>
+</p>
+
+<p>
+  <strong>Num ports:</strong>
+  <%= @router.numPorts %>
+</p>
+
+<p>
+  <strong>Test:</strong>
+  <%= @router.test.name if @router.test %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @router.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_router_path(@router) %> |
+<%= link_to 'Back', routers_path %>

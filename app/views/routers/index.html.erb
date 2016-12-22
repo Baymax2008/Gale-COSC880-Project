@@ -1,0 +1,36 @@
+<h1>Routers</h1>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Serial Number</th>
+          <th>Num ports</th>
+          <th>Test Name</th>
+          <th>Description</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @routers.each do |router| %>
+          <tr>
+            <td><%= router.serialNum %></td>
+            <td><%= router.numPorts %></td>
+            <td><%= router.test.name if router.test %></td>
+            <td><%= router.description %></td>
+            <td><%= link_to 'Show', router, class: 'btn btn-primary' %></td>
+            <td><%= link_to 'Edit', edit_router_path(router), class: 'btn btn-success' %></td>
+            <td><%= link_to 'Destroy', router, method: :delete, class: 'btn btn-danger',
+                            data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<%= link_to 'Add Router', new_router_path, class: 'btn btn-default' %>

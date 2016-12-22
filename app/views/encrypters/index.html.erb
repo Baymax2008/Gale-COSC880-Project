@@ -1,0 +1,39 @@
+<h1>Encrypters</h1>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Serial Number</th>
+          <th>Speed</th>
+          <th>Expiration</th>
+          <th>Test Name</th>
+          <th>Description</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @encrypters.each do |encrypter| %>
+          <tr>
+            <td><%= encrypter.serialNum %></td>
+            <td><p><%= encrypter.speed %> mbps</p></td>
+            <td><%= encrypter.expiration %></td>
+            <td><%= encrypter.test.name if encrypter.test %></td>
+            <td><%= encrypter.description %></td>
+            <td><%= link_to 'Show', encrypter, class: 'btn btn-primary' %></td>
+            <td><%= link_to 'Edit', edit_encrypter_path(encrypter), class: 'btn btn-success' %></td>
+            <td><%= link_to 'Destroy', encrypter, method: :delete, class: 'btn btn-danger',
+                            data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<br>
+
+<%= link_to 'Add Encrypter', new_encrypter_path, class: 'btn btn-default' %>

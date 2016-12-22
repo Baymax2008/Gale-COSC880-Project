@@ -1,0 +1,47 @@
+<h1>Listing Systems</h1>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Ia approval</th>
+        <th>Ato approval</th>
+        <th>Ato expiration</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @system_approvals.each do |system_approval| %>
+        <% if current_user.lab_id == system_approval.system.lab_id || current_user.ia_admin? || current_user.it_admin? %>
+          <tr>
+            <td><%= system_approval.system.name %></td>
+            <td><%= system_approval.iaApproved %></td>
+            <td><%= system_approval.atoApproved %></td>
+            <td><%= system_approval.system.ato_Expiration %></td>
+
+            <td><%= link_to 'Show', system_approval.system, class: "btn btn-primary" %></td>
+
+            <% if current_user.ia_admin? %>
+              <td><%= link_to 'Edit', edit_system_approval_path(system_approval), class: "btn btn-success" %></td>
+
+            <% elsif current_user.customer? %>
+              <td><%= link_to 'Edit', edit_system_path(system_approval.system), class: "btn btn-success" %></td>
+              <td><%= link_to 'Destroy', system_approval.system, method: :delete, class: "btn btn-danger",
+                              data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<% if current_user.customer? && current_user.lab_id != nil %>
+    <%= link_to 'New System', new_system_path, class: 'btn btn-default' %>
+<% end %>

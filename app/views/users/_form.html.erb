@@ -1,0 +1,80 @@
+<div class="row">
+  <%= form_for @user, html: { class: 'form-horizontal'}  do |f| %>
+      <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this test from being saved:</h2>
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= @user.email %>
+        </div>
+      </div>
+
+      <% if current_user.admin? %>
+
+        <div class="control-group">
+          <%= f.label :admin, class: 'control-label' %>
+          <div class="controls">
+            <%= f.check_box :admin %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :ia_admin, class: 'control-label' %>
+          <div class="controls">
+            <%= f.check_box :ia_admin %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :it_admin, class: 'control-label' %>
+          <div class="controls">
+            <%= f.check_box :it_admin %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :customer, class: 'control-label' %>
+          <div class="controls">
+            <%= f.check_box :customer %>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- checking for Manager -->
+      <% manager = false %>
+      <% if current_user.lab_id != nil  %>
+        <% tmp = Lab.find(current_user.lab_id ) %>
+        <% if current_user.id == tmp.mgr_id %>
+          <% manager = true %>
+        <% end %>
+      <% end %>
+
+      <% if manager %>
+        <div class="control-group">
+          <div class="controls">
+            <p>You are the manager of <%= tmp.name %> and there for can not change labs</p>
+          </div>
+        </div>
+      <% elsif current_user.customer? %>
+        <div class="control-group">
+          <%= f.label :lab_id, class: 'control-label' %>
+          <div class="controls">
+            <%= collection_select( :user, :lab_id, Lab.all, :id, :name, { include_blank: true },
+                                   { :multiple => false } ) %>
+          </div>
+        </div>
+      <% end %>
+
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit %>
+        </div>
+      </div>
+  <% end %>
+</div>

@@ -1,0 +1,54 @@
+<div class="row">
+
+  <%= form_for @router, html: { class: 'form-horizontal'} do |f| %>
+    <% if @router.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@router.errors.count, "error") %> prohibited this router from being saved:</h2>
+
+        <ul>
+        <% @router.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :serialNum, class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :serialNum %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :numPorts, class: 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :numPorts %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :test_id, class: 'control-label' %>
+      <div class="controls">
+        <%= collection_select( :router, :test_id, Test.all, :id, :name, { include_blank: true },
+                             { :multiple => false } ) %>
+      </div>
+    </div>
+
+
+    <div class="control-group">
+      <%= f.label :description, class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :description %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit %>
+      </div>
+    </div>
+
+  <% end %>
+</div>
+

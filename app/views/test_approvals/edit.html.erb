@@ -1,0 +1,9 @@
+<h1>
+  <%= @test_approval.test.system.lab.name%>:   <%= @test_approval.test.system.name%><br>
+  <%= @test_approval.test.name%>
+</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @test_approval %> |
+<%= link_to 'Back', test_approvals_path %>

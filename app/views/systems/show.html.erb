@@ -1,0 +1,39 @@
+<p>
+  <strong>Name:</strong>
+  <%= @system.name %>
+</p>
+
+<p>
+  <strong>Ia approval:</strong>
+  <%= @approvel.iaApproved %>
+</p>
+
+<p>
+  <strong>Ato approval:</strong>
+  <%= @approvel.atoApproved %>
+</p>
+
+<p>
+  <strong>Ato expiration:</strong>
+  <%= @system.ato_Expiration %>
+</p>
+
+<p>
+  <strong>Ato doc:</strong>
+  <% if @system.atoDoc_file_size != nil %>
+    <%= link_to 'View ', @system.atoDoc.url, target: "_blank" %>
+  <% else %>
+    Missing
+  <% end %>
+</p>
+
+<p>
+  <strong>Lab:</strong>
+  <%= link_to @system.lab.name,  @system.lab %>
+</p>
+
+<% if current_user.customer? %>
+  <%= link_to 'Edit', edit_system_path(@system) %> |
+<% end %>
+
+<%= link_to 'Back', system_approvals_path %>

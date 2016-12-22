@@ -1,0 +1,43 @@
+<div class="row">
+  <%= form_for @system, html: { class: 'form-horizontal', multipart: true } do |f| %>
+    <% if @system.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@system.errors.count, "error") %> prohibited this system from being saved:</h2>
+
+        <ul>
+        <% @system.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :name, "Name:", class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :ato_Expiration, class: 'control-label' %>
+      <div class="controls">
+        <%= f.date_select :ato_Expiration %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :atoDoc, class: 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :atoDoc %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="controls">
+        <%= f.submit %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

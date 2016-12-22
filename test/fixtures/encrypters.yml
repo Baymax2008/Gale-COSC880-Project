@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  serialNum: MyString
+  description: MyText
+  speed: 1
+  expiration: 2016-11-14
+  test: 
+
+two:
+  serialNum: MyString
+  description: MyText
+  speed: 1
+  expiration: 2016-11-14
+  test: 

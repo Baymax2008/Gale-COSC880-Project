@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  classification: MyString
+  pocName: MyString
+  pocNumber: MyString
+  experationDate: 2016-11-17
+
+two:
+  classification: MyString
+  pocName: MyString
+  pocNumber: MyString
+  experationDate: 2016-11-17

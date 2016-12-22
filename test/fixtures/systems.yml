@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  ia_Approval: false
+  ato_Approval: false
+  ato_Expiration: 2016-11-17
+  ato_Doc: MyText
+
+two:
+  name: MyString
+  ia_Approval: false
+  ato_Approval: false
+  ato_Expiration: 2016-11-17
+  ato_Doc: MyText

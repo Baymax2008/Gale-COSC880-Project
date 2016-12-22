@@ -1,0 +1,47 @@
+<p>
+  <strong>Name:</strong>
+  <%= @lab.name %>
+</p>
+
+<p>
+  <strong>Accrediation:</strong>
+  <% if @lab.accrediation_file_size != nil%>
+    <%= link_to 'View', @lab.accrediation.url, target: "_blank" %>
+  <% else %>
+    Missing
+  <% end %>
+</p>
+
+<p>
+  <strong>Accred Date:</strong>
+  <%= @lab.accredDate %>
+</p>
+
+<p>
+  <strong>Loa:</strong>
+  <% if @lab.loa_file_size != nil%>
+      <%= link_to 'View', @lab.loa.url, target: "_blank" %>
+  <% else %>
+      Missing
+  <% end %>
+</p>
+
+<p>
+  <strong>Loa approval:</strong>
+  <%= @approvel.approved %>
+</p>
+
+<p>
+  <strong>Loa expiration:</strong>
+  <%= @lab.loa_Expiration %>
+</p>
+
+<p>
+  <strong>Lab manager:</strong>
+  <%= @mgr.email %>
+</p>
+
+<% if current_user.customer? %>
+  <%= link_to 'Edit', edit_lab_path(@lab) %> |
+<% end %>
+<%= link_to 'Back', lab_approvals_path %>

@@ -1,0 +1,63 @@
+<div class="row">
+
+  <%= form_for @encrypter, html: { class: 'form-horizontal'} do |f| %>
+
+    <% if @encrypter.errors.any? %>
+
+      <div id="error_explanation">
+
+        <h2><%= pluralize(@encrypter.errors.count, "error") %> prohibited this encrypter from being saved:</h2>
+
+        <ul>
+          <% @encrypter.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :serialNum, class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :serialNum %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :description, class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :description %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :speed, class: 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :speed %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :expiration, class: 'control-label' %>
+      <div class="controls">
+        <%= f.date_select :expiration %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :test_id, class: 'control-label' %>
+      <div class="controls">
+        <%= collection_select( :encrypter, :test_id, Test.all, :id, :name, { include_blank: true },
+                               { :multiple => false } ) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

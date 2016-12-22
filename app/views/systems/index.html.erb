@@ -1,0 +1,55 @@
+
+
+
+
+<!- OLD FILE NO LONGER BEING USED ->
+<h1> If you see this please report what you did!</h1>
+
+
+
+<h1>Listing Systems</h1>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Ia approval</th>
+          <th>Ato approval</th>
+          <th>Ato expiration</th>
+          <th>Ato doc</th>
+          <th> Developing Lab</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @systems.each do |system| %>
+          <% if current_user.lab_id == system.lab_id || current_user.ia_admin? || current_user.it_admin? %>
+            <tr>
+              <td><%= system.name %></td>
+              <td><%= system.system_approval.iaApproved %></td>
+              <td><%= system.system_approval.atoApproved %></td>
+              <td><%= system.ato_Expiration %></td>
+              <td><%= system.ato_Doc %></td>
+              <td><%= system.lab.name if system.lab %></td>
+              <td><%= link_to 'Show', system, class: "btn btn-primary" %></td>
+              <% if current_user.customer? %>
+                <td><%= link_to 'Edit', edit_system_path(system), class: "btn btn-success" %></td>
+                <td><%= link_to 'Destroy', system, method: :delete, class: "btn btn-danger",
+                                data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<% if current_user.customer? %>
+  <%= link_to 'New System', new_system_path %>
+<% end %>

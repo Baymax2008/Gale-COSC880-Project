@@ -1,0 +1,1 @@
+json.partial! "encrypters/encrypter", encrypter: @encrypter

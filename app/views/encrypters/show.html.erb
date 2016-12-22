@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Serialnum:</strong>
+  <%= @encrypter.serialNum %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @encrypter.description %>
+</p>
+
+<p>
+  <strong>Speed:</strong>
+  <%= @encrypter.speed %>
+</p>
+
+<p>
+  <strong>Expiration:</strong>
+  <%= @encrypter.expiration %>
+</p>
+
+<p>
+  <strong>Test:</strong>
+  <%= @encrypter.test.name if @encrypter.test %>
+</p>
+
+<%= link_to 'Edit', edit_encrypter_path(@encrypter) %> |
+<%= link_to 'Back', encrypters_path %>

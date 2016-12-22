@@ -1,0 +1,57 @@
+<div class="row">
+  <%= form_for @lab, html: { class: 'form-horizontal', multipart: true } do |f| %>
+    <% if @lab.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@lab.errors.count, "error") %> prohibited this lab from being saved:</h2>
+
+        <ul>
+        <% @lab.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :name, "Name:", class: 'control-label' %>
+      <div class="controls">
+       <%= f.text_field :name %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :accrediation, "Accrediation:", class: 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :accrediation %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :accredDate, "Accrediation Date:", class: 'control-label' %>
+      <div class="controls">
+        <%= f.date_select :accredDate %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :loa, "LoA PDF:", class: 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :loa %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :loa_Expiration, "LoA Expiration Date:", class: 'control-label' %>
+      <div class="controls">
+        <%= f.date_select :loa_Expiration %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="controls">
+        <%= f.submit %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

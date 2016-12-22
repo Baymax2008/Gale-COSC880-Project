@@ -1,0 +1,38 @@
+<h1>
+  <strong>email:</strong>
+  <%= @user.email %>
+</h1>
+<% if @user.admin? %>
+  <p>
+    <strong>Admin:</strong>
+    <%= @user.admin %>
+  </p>
+<% end %>
+<% if @user.ia_admin? %>
+  <p>
+    <strong>IA Admin:</strong>
+    <%= @user.ia_admin %>
+  </p>
+<% end %>
+<% if @user.it_admin? %>
+  <p>
+    <strong>IT admin:</strong>
+    <%= @user.it_admin %>
+  </p>
+<% end %>
+<% if @user.customer? %>
+  <p>
+    <strong>Customer:</strong>
+    <%= @user.customer %>
+  </p>
+
+  <p>
+    <strong>Lab:</strong>
+    <%= @user.lab.name if @user.lab %>
+  </p>
+<% end %>
+
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_index_path %>
